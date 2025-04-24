@@ -28,21 +28,17 @@ export default function Main() {
     const [ingredients, setIngredients] = React.useState(
         ["all the main spices", "pasta", "ground beef", "tomato paste"]
     )
-    const [recipeShown, setRecipeShown] = React.useState(true)
-    
+    const [recipeShown, setRecipeShown] = React.useState(false)
+
     function toggleRecipeShown() {
         setRecipeShown(prevShown => !prevShown)
     }
-
-    const ingredientsListItems = ingredients.map(ingredient => (
-        <li key={ingredient}>{ingredient}</li>
-    ))
 
     function addIngredient(formData) {
         const newIngredient = formData.get("ingredient")
         setIngredients(prevIngredients => [...prevIngredients, newIngredient])
     }
-
+    console.log(<Ingredients />)
     return (
         <main>
             <form action={addIngredient} className="add-ingredient-form">
@@ -54,9 +50,8 @@ export default function Main() {
                 />
                 <button>Add ingredient</button>
             </form>
-            
-            {ingredients.length>0 && <Ingredients ingredients={ingredients} ingredientList={ingredientsListItems}/>}
-            
+
+            <Ingredients ingredients={ingredients} />
             {recipeShown && <Recipe />}
         </main>
     )
